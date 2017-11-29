@@ -305,7 +305,6 @@ alert(document.getElementById('foo').tagName);
 ```
 
 
-
 ### 2.4 属性
 
 
@@ -363,6 +362,25 @@ alert(document.getElementById('foo').tagName);
 <ol data-ui-type="Select"></ol>
 ```
 
+#### [建议] 属性顺序。
+
+解释：
+
+HTML 属性应该按照特定的顺序出现以保证易读性。
+* id
+* class
+* name
+* data-xxx
+* src, for, type, href
+* title, alt
+* aria-xxx, role
+* 
+```html
+<a id="..." class="..." data-modal="toggle" href=""></a>
+<input class="form-control" type="text">
+<img src="..." alt="...">
+```
+
 
 
 ## 3 通用
@@ -386,6 +404,8 @@ alert(document.getElementById('foo').tagName);
 ```html
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 ```
+解释：作用是优先使用最新版本的IE 和 Chrome 内核
+
 
 #### [建议] 在 `html` 标签上设置正确的 `lang` 属性。
 
@@ -543,12 +563,19 @@ alert(document.getElementById('foo').tagName);
 <link rel="shortcut icon" href="path/to/favicon.ico">
 ```
 
+
+
 ### 4.3 viewport
 
 
 #### [建议] 若页面欲对移动设备友好，需指定页面的 `viewport`。
 
 解释：
+* viewport: 一般指的是浏览器窗口内容区的大小，不包含工具条、选项卡等内容；
+* width: 浏览器宽度，输出设备中的页面可见区域宽度；
+* device-width: 设备分辨率宽度，输出设备的屏幕可见宽度；
+* initial-scale: 初始缩放比例；
+* maximum-scale: 最大缩放比例；
 
 viewport meta tag 可以设置可视区域的宽度和初始缩放大小，避免在移动设备上出现页面展示不正常。
 
@@ -556,9 +583,52 @@ viewport meta tag 可以设置可视区域的宽度和初始缩放大小，避�
 
 另外，为了使 viewport 正常工作，在页面内容样式布局设计上也要做相应调整，如避免绝对定位等。关于 viewport 的更多介绍，可以参见 [Safari Web Content Guide的介绍](https://developer.apple.com/library/mac/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html#//apple_ref/doc/uid/TP40006509-SW26)
 
+示例：
 
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+解释：为移动端设备优化，设置可见区域的宽度和初始缩放比例。
 
+### 4.4 iOS 图标
+* apple-touch-icon 图片自动处理成圆角和高光等效果;
+* apple-touch-icon-precomposed 禁止系统自动添加效果，直接显示设计原图;
 
+```html
+<!-- iPhone 和 iTouch，默认 57x57 像素，必须有 -->
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57x57-precomposed.png">
+
+<!-- iPad，72x72 像素，可以没有，但推荐有 -->
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-72x72-precomposed.png" sizes="72x72">
+
+<!-- Retina iPhone 和 Retina iTouch，114x114 像素，可以没有，但推荐有 -->
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-114x114-precomposed.png" sizes="114x114">
+
+<!-- Retina iPad，144x144 像素，可以没有，但推荐有 -->
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144x144-precomposed.png" sizes="144x144">
+```
+### 4.5 HEAD 模板
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Style Guide</title>
+    <meta name="description" content="不超过150个字符">
+    <meta name="keywords" content="">
+    <meta name="author" content="name, email@gmail.com">
+
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- iOS 图标 -->
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57x57-precomposed.png">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="path/to/favicon.ico">
+</head>
+```
 ## 5 图片
 
 
