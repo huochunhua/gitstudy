@@ -13,6 +13,8 @@
 
 　　[2.4 属性](#user-content-24-%E5%B1%9E%E6%80%A7)
 
+　　[2.5 注释](#user-content-25-注释)
+
 [3 通用](#user-content-3-%E9%80%9A%E7%94%A8)
 
 　　[3.1 DOCTYPE](#user-content-31-doctype)
@@ -47,27 +49,9 @@
 ## 1 前言
 
 
-HTML 作为描述网页结构的超文本标记语言，在百度一直有着广泛的应用。本文档的目标是使 HTML 代码风格保持一致，容易被理解和被维护。
+HTML 作为描述网页结构的超文本标记语言，一直有着广泛的应用。本文档的目标是使 HTML 代码风格保持一致，容易被理解和被维护。
 
-## 2 注释
-短语句注释
-```html
-<!-- CSS
-================================================== -->
-<link rel="stylesheet" href="css/style.css">
-```
-长语句注释
 
-```html
-<!-- Info Section
-================================================== -->
-....... html code .......<!-- Info Section End-->
-```
-一般注释
-```html
-<!-- Entry -->
-....... html code .......<!-- Entry End -->
-```
 
 ## 2 代码风格
 
@@ -109,8 +93,6 @@ require(['app'], function (app) {
 
 
 ### 2.2 命名
-
-
 
 #### [强制] `class` 必须单词全字母小写，单词间以 `-` 分隔。
 
@@ -367,6 +349,7 @@ alert(document.getElementById('foo').tagName);
 解释：
 
 HTML 属性应该按照特定的顺序出现以保证易读性。
+
 * id
 * class
 * name
@@ -374,13 +357,32 @@ HTML 属性应该按照特定的顺序出现以保证易读性。
 * src, for, type, href
 * title, alt
 * aria-xxx, role
-* 
+
 ```html
 <a id="..." class="..." data-modal="toggle" href=""></a>
 <input class="form-control" type="text">
 <img src="..." alt="...">
 ```
+### 2.5 注释
 
+短语句注释
+```html
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+```
+长语句注释
+
+```html
+<!-- Info Section
+================================================== -->
+....... html code .......<!-- Info Section End-->
+```
+一般注释
+```html
+<!-- Entry -->
+....... html code .......<!-- Entry End -->
+```
 
 
 ## 3 通用
