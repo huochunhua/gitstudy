@@ -31,6 +31,10 @@
 
 　　[4.3 viewport](#user-content-43-viewport)
 
+　　[4.4 IOS 图标](#)
+
+　　[4.5 HEAD 模板](#)
+
 [5 图片](#user-content-5-%E5%9B%BE%E7%89%87)
 
 [6 表单](#user-content-6-%E8%A1%A8%E5%8D%95)
@@ -62,6 +66,11 @@ HTML 作为描述网页结构的超文本标记语言，一直有着广泛的应
 #### [强制] 使用 `4` 个空格做为一个缩进层级，不允许使用 `2` 个空格 或 `tab` 字符。
 
 解释：
+
+不同系统的TAB空格数不同；
+
+不使用2个而使用4个是保持一致。
+
 对于非 HTML 标签之间的缩进，比如 script 或 style 标签内容缩进，与 script 或 style 标签的缩进同级。
 
 示例：
@@ -91,10 +100,13 @@ require(['app'], function (app) {
 
 过长的代码不容易阅读与维护。但是考虑到 HTML 的特殊性，不做硬性要求。
 
+### 2.2 空格
+
+
 
 ### 2.2 命名
 
-#### [强制] `class` 必须单词全字母小写，单词间以 `-` 分隔。
+#### [强制] `class` 必须单词全字母小写，单词间以 `-` (中横线) 分隔。
 
 #### [强制] `class` 必须代表相应模块或部件的内容或功能，不得以样式信息进行命名。
 
@@ -253,6 +265,13 @@ alert(document.getElementById('foo').tagName);
 - ol - 有序列表
 - dl,dt,dd - 定义列表
 
+dl 表示关联列表, dd是对dt的解释; dt和dd的对应关系比较随意： 一个dt对应多个dd、多个dt对应一个dd、多个dt对应多个dd, 都合法; 可用于名词/单词解释、日程列表、站点目录;
+
+ul 表示无序列表;
+
+ol 表示有序列表, 可用于排行榜等;
+
+li 表示列表项, 必须是ul/ol的子元素;
 
 示例：
 
@@ -285,7 +304,19 @@ alert(document.getElementById('foo').tagName);
     <img src="image.png">
 </span>
 ```
+在编写HTML代码时，需要尽量避免多余的父节点；
 
+很多时候，需要通过迭代和重构来使HTML变得更少。
+
+#### [建议] JS生成标签
+
+在JS文件中生成标签让内容变得更难查找，更难编辑，性能更差。应该尽量避免这种情况的出现。
+
+#### [建议] 实用高于完美
+
+尽量遵循HTML标准和语义，但是不应该以浪费实用性作为代价；
+
+任何时候都要用尽量小的复杂度和尽量少的标签来解决问题。
 
 ### 2.4 属性
 
@@ -350,13 +381,14 @@ alert(document.getElementById('foo').tagName);
 
 HTML 属性应该按照特定的顺序出现以保证易读性。
 
-* id
 * class
+* id
 * name
-* data-xxx
-* src, for, type, href
-* title, alt
-* aria-xxx, role
+* data-*
+* src, for, type, href, value , max-length, max, min, pattern
+* placeholder, title, alt
+* aria-*, role
+* required, readonly, disabled
 
 ```html
 <a id="..." class="..." data-modal="toggle" href=""></a>
@@ -384,6 +416,34 @@ HTML 属性应该按照特定的顺序出现以保证易读性。
 ....... html code .......<!-- Entry End -->
 ```
 
+### 2.6 协议
+
+如果链接和当前页面一致则忽略链接的协议部分
+
+```html
+<!-- 不推荐 -->
+<script src="http://www.taobao.com/fp.js"></script>
+<!-- 推荐 -->
+<script src="//www.taobao.com/fp.js"></script>
+/* 不推荐 */
+.example {
+  background: url(http://www.taobao.com/fp.css);
+}
+/* 推荐 */
+.example {
+  background: url(//www.taobao.com/fp.css);
+}
+```
+### 2.7 TODO
+
+* 使用 TODO 来标记待做事情，便于后期搜索.
+* 在 TODO 后添加 (姓名或邮件) 来表示分类.
+
+```html
+<!-- TODO(yiminghe): remove duplicate tag -->
+<p><span>2</span></p>
+```
+
 
 ## 3 通用
 
@@ -408,6 +468,14 @@ HTML 属性应该按照特定的顺序出现以保证易读性。
 ```
 解释：作用是优先使用最新版本的IE 和 Chrome 内核
 
+拓展：
+
+用 `<meta>` 标签可以指定页面应该用什么版本的IE来渲染；
+
+如果你想要了解更多，请点击[这里](http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e)；
+
+不同doctype在不同浏览器下会触发不同的渲染模式（[这篇文章](https://hsivonen.fi/doctype/)总结的很到位）。
+
 
 #### [建议] 在 `html` 标签上设置正确的 `lang` 属性。
 
@@ -421,7 +489,15 @@ HTML 属性应该按照特定的顺序出现以保证易读性。
 ```html
 <html lang="zh-CN">
 ```
+根据HTML5规范：
 
+> 应在html标签上加上lang属性。这会给语音工具和翻译工具帮助，告诉它们应当怎么去发音和翻译。
+
+更多关于 `lang` 属性的说明在[这里](http://www.w3.org/html/wg/drafts/html/master/semantics.html#the-html-element)；
+
+在sitepoint上可以查到[语言列表](http://reference.sitepoint.com/html/lang-codes)；
+
+但sitepoint只是给出了语言的大类，例如中文只给出了zh，但是没有区分香港，台湾，大陆。而微软给出了一份更加[详细的语言列表](http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx)，其中细分了zh-cn, zh-hk, zh-tw。
 
 ### 3.2 编码
 
@@ -465,8 +541,24 @@ HTML 属性应该按照特定的顺序出现以保证易读性。
 <link rel="stylesheet" href="page.css">
 ```
 
-
 #### [建议] 引入 `CSS` 和 `JavaScript` 时无须指明 `type` 属性。
+```html
+<!-- External CSS -->
+<link rel="stylesheet" href="code_guide.css">
+
+<!-- In-document CSS -->
+<style>
+    ...
+</style>
+
+<!-- External JS -->
+<script src="code_guide.js"></script>
+
+<!-- In-document JS -->
+<script>
+    ...
+</script>
+```
 
 解释：
 
@@ -486,6 +578,14 @@ HTML 属性应该按照特定的顺序出现以保证易读性。
 
 在页面渲染的过程中，新的CSS可能导致元素的样式重新计算和绘制，页面闪烁。
 
+#### [强制] 插件、框架样式、引用字体等一定要在自定义样式前引入。
+
+```html
+<link rel="stylesheet" href="bootstrap.css">
+<link rel="stylesheet" href="font.css">
+<link rel="stylesheet" href="plugin.css">
+<link rel="stylesheet" href="main.css">
+```
 
 #### [建议] `JavaScript` 应当放在页面末尾，或采用异步加载。
 
@@ -631,9 +731,8 @@ viewport meta tag 可以设置可视区域的宽度和初始缩放大小，避�
     <link rel="shortcut icon" href="path/to/favicon.ico">
 </head>
 ```
+
 ## 5 图片
-
-
 
 #### [强制] 禁止 `img` 的 `src` 取值为空。延迟加载的图片也要增加默认的 `src`。
 
