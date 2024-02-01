@@ -1,0 +1,5 @@
+英文   http://fontawesome.io/
+中文   http://www.bootcss.com/p/font-awesome/
+自定义 http://www.iconfont.cn/
+------------------------
+其它   https://icomoon.io/
