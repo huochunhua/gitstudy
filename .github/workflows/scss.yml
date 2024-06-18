@@ -20,4 +20,7 @@ jobs:
       run: npm install -g sass
 
     - name: 手动编译SCSS到CSS
-      run: sass --update scss:css
+      run: |
+        sass --update scss:css --style compressed
+      env:
+        TZ: UTC
