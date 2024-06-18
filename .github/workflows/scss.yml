@@ -20,4 +20,4 @@ jobs:
       run: npm install -g sass
 
     - name: 手动编译SCSS到CSS
-      run: sass path/to/your/scss/file.scss path/to/your/css/file.css
+      run: sass scss/ css/
