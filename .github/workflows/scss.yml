@@ -9,10 +9,10 @@ jobs:
 
     steps:
     - name: Checkout源代码
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.308.0
 
     - name: 安装Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v2.308.0
       with:
         node-version: '20.12.1'
 
