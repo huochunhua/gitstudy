@@ -1,0 +1,23 @@
+name: 手动编译SCSS文件
+
+on:
+  workflow_dispatch:  # 允许手动触发工作流程
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout源代码
+      uses: actions/checkout@v2
+
+    - name: 安装Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: 安装Sass
+      run: npm install -g sass
+
+    - name: 手动编译SCSS到CSS
+      run: sass path/to/your/scss/file.scss path/to/your/css/file.css
