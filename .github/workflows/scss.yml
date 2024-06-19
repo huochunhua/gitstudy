@@ -2,7 +2,9 @@ name: 手动编译SCSS文件
 
 on:
   workflow_dispatch:  # 允许手动触发工作流程
-
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
