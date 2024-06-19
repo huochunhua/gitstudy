@@ -1,0 +1,23 @@
+name: 手动编译SCSS文件2
+
+on:
+  push:
+    branches:
+      - master  # 触发分支可以根据你的需要修改
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Node.js and Sass
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+      # 安装sass
+    - run: npm install -g sass
+
+    - name: Compile Sass to CSS
+      run: sass --update scss:css --style expanded
