@@ -20,6 +20,9 @@ jobs:
 
       - name: Install Sass
         run: npm install -g sass
-
+        
+      - name: Clear Sass cache
+        run: sass --no-cache
+  
       - name: Compile SCSS to CSS
-        run: sass scss/:css/
+        run: sass --update scss/:css/
