@@ -1,4 +1,4 @@
-name: Compile SCSS to CSS
+name: Compile SCSS to CSS3
 
 on:
   push:
