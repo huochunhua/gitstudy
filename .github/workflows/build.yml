@@ -3,7 +3,7 @@ name: Compile SCSS to CSS
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
