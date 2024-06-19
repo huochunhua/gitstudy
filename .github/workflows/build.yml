@@ -1,0 +1,20 @@
+name: 手动编译SCSS文件
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Node.js and Sass
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+      # 安装sass
+    - run: npm install -g sass
+
+    - name: Compile Sass to CSS
+      run: sass --update scss:css --style expanded
